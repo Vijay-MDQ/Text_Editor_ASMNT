@@ -15,37 +15,44 @@ const initialState: TextState = {
 const textReducer = (state = initialState, action: any): TextState => {
   const { past, present, future } = state;
 
+  console.log(present, "present");
+  console.log(future, "future");
+  console.log(past, "past");
+
   switch (action.type) {
     case UPDATE_TEXT:
       const words = action.text.split(" ");
-      const lastWord = action.word;
-      // console.log(lastWord, "reucer lastWord");
-      // console.log(words, "reucer words");
-      return {
-        past: [...past, lastWord],
-        present: words.join(" "),
-        future: [],
-      };
+      if (words.length === 1) {
+        return {
+          past: [],
+          present: action.text,
+          future: [],
+        };
+      } else {
+        return {
+          past: [...past, words[words.length - 2]],
+          present: action.text,
+          future: [],
+        };
+      }
+
     case UNDO:
       if (past.length === 0) return state;
-      const previous = past[past.length - 1];
-      // console.log(previous, "reucer previous");
       const newPresent = present.split(" ").slice(0, -1).join(" ");
-      // console.log(newPresent, "reucer newPresent");
+      const word = present.split(" ").pop();
       return {
         past: past.slice(0, -1),
         present: newPresent,
-        future: [previous, ...future],
+        future: word ? [word, ...future] : future,
       };
     case REDO:
       if (future.length === 0) return state;
       const next = future[0];
-      // console.log(next, "reucer next");
-      const newPresentRedo = present + " " + next;
-      // console.log(newPresentRedo, "reucer newPresentRedo");
+      const presentWords = present.split(" ");
+      presentWords.push(next);
       return {
-        past: [...past, present.split(" ").pop() || ""],
-        present: newPresentRedo,
+        past: [...past, next],
+        present: presentWords.join(" "),
         future: future.slice(1),
       };
     default:
