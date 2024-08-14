@@ -17,7 +17,6 @@ const textReducer = (state = initialState, action: any): TextState => {
 
   switch (action.type) {
     case UPDATE_TEXT:
-      // Handle word-by-word update
       const words = action.text.split(" ");
       const lastWord = action.word;
       console.log(lastWord, "reucer lastWord");
