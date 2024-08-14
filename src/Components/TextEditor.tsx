@@ -20,7 +20,7 @@ const TextEditor: React.FC = () => {
     const currentText = e.target.value;
     const words = currentText.split(" ");
     const lastWord = words[words.length - 1];
-    console.log(lastWord);
+    // console.log(lastWord);
     dispatch(updateText(currentText, lastWord));
   };
 

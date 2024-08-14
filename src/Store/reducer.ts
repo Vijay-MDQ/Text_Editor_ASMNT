@@ -19,8 +19,8 @@ const textReducer = (state = initialState, action: any): TextState => {
     case UPDATE_TEXT:
       const words = action.text.split(" ");
       const lastWord = action.word;
-      console.log(lastWord, "reucer lastWord");
-      console.log(words, "reucer words");
+      // console.log(lastWord, "reucer lastWord");
+      // console.log(words, "reucer words");
       return {
         past: [...past, lastWord],
         present: words.join(" "),
@@ -29,9 +29,9 @@ const textReducer = (state = initialState, action: any): TextState => {
     case UNDO:
       if (past.length === 0) return state;
       const previous = past[past.length - 1];
-      console.log(previous, "reucer previous");
+      // console.log(previous, "reucer previous");
       const newPresent = present.split(" ").slice(0, -1).join(" ");
-      console.log(newPresent, "reucer newPresent");
+      // console.log(newPresent, "reucer newPresent");
       return {
         past: past.slice(0, -1),
         present: newPresent,
@@ -40,9 +40,9 @@ const textReducer = (state = initialState, action: any): TextState => {
     case REDO:
       if (future.length === 0) return state;
       const next = future[0];
-      console.log(next, "reucer next");
+      // console.log(next, "reucer next");
       const newPresentRedo = present + " " + next;
-      console.log(newPresentRedo, "reucer newPresentRedo");
+      // console.log(newPresentRedo, "reucer newPresentRedo");
       return {
         past: [...past, present.split(" ").pop() || ""],
         present: newPresentRedo,
