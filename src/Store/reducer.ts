@@ -1,9 +1,9 @@
 import { UPDATE_TEXT, UNDO, REDO } from "./actions";
 
 interface TextState {
-  past: string[]; // History of changes as words
-  present: string; // Current state of the text
-  future: string[]; // Redo stack
+  past: string[];
+  present: string;
+  future: string[];
 }
 
 const initialState: TextState = {
