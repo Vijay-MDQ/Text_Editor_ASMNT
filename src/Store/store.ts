@@ -1,4 +1,3 @@
-// src/store.ts
 import { createStore, combineReducers } from "redux";
 import textReducer from "./reducer";
 

@@ -1,4 +1,3 @@
-// src/reducer.ts
 import { UPDATE_TEXT, UNDO, REDO } from "./actions";
 
 interface TextState {
